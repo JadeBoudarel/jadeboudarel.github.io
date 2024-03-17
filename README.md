@@ -36,14 +36,16 @@
 
 <h2 align="left">Here are my social networks 👇</h2>
 
+ <div>
+  <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />       foxylarenarde
+  </div>
+  <div>
+  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo"  />       jade.boudarel@gmail.com
+  </div>
+  <div>
+  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo"  />       www.linkedin.com/in/jade-boudarel-74a826299
+  </div>
 
-<div align="left">
-  <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
-  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo"  />
-  <a href="www.linkedin.com/in/jade-boudarel-74a826299" target="_blank">
-  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo"  />
-  </a>
-</div>
 
 
 
@@ -72,5 +74,6 @@
 [page parcours](https://jadeboudarel.github.io/visu-velo/static/parcours.html)  
 [page de try-flask](https://github.com/jadeBoudarel/try-flask)  
 [page de try_bootstrap](https://jadeboudarel.github.io/try_bootstrap/)
+
 
 
