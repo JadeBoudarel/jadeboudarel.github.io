@@ -5,7 +5,7 @@
 
        
 
-<h2 align="center">Hi 👋! My name is Jade and I'm a 21, from France</h2>
+<h2 align="center">Hi 👋! My name is Jade and I'm 21, from France</h2>
 
 
 ## Use To Code
