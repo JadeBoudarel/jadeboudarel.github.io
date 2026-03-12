@@ -7,13 +7,22 @@
     body {
       margin: 0;
       padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      /* Dégradé magnifique en arrière-plan */
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      overflow-x: hidden;
       position: relative;
+      overflow-x: hidden;
     }
     
-    /* Canvas pour le snake animé en arrière-plan */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Canvas 10 serpents */
     #snakeCanvas {
       position: fixed;
       top: 0;
@@ -23,82 +32,119 @@
       transition: opacity 2s ease-in-out;
     }
     
-    /* Fondu d'apparition */
     body.loaded #snakeCanvas {
-      opacity: 0.3;
+      opacity: 0.25;
     }
     
-    .content {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-      background: rgba(255,255,255,0.95);
+    /* Blocs espacés avec marges */
+    .block {
+      background: rgba(255, 255, 255, 0.95);
+      margin: 30px auto;
+      padding: 30px;
       border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      backdrop-filter: blur(10px);
     }
     
-    /* Reste de tes styles personnalisés */
+    /* Logos petits alignés */
+    .tech-logos {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+    
+    .tech-logos img {
+      height: 22px;
+      width: auto;
+      flex-shrink: 0;
+    }
+    
+    .social div {
+      margin: 10px 0;
+    }
+    
+    .images {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .gifs-side {
+      display: flex;
+      gap: 20px;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
     img { max-width: 100%; height: auto; }
-    .badges { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 20px 0; }
-    .social { margin: 20px 0; }
-    h2 { color: #333; }
+    h2 { color: #333; margin: 0 0 20px 0; }
   </style>
 </head>
 <body>
-  <!-- Canvas pour le snake animé -->
   <canvas id="snakeCanvas"></canvas>
   
-  <div class="content">
+  <!-- BLOC 1: Phrase d'accueil -->
+  <div class="block">
     <h2 align="center">Hi 👋! My name is Jade and I'm 23, from France</h2>
+  </div>
 
-    <div align="center" class="badges">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="30" alt="javascript logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="30" alt="html5 logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="30" alt="css3 logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="30" alt="python logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="30" alt="arduino logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="30" alt="php logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" height="30" alt="pycharm logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="30" alt="vscode logo" />
-      <img src="https://skillicons.dev/icons?i=ps" height="30" alt="adobephotoshop logo" />
-      <img src="https://skillicons.dev/icons?i=ai" height="30" alt="adobeillustrator logo" />
+  <!-- BLOC 2: Logos -->
+  <div class="block">
+    <div align="center" class="tech-logos">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="22" alt="javascript logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="22" alt="html5 logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="22" alt="css3 logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="22" alt="python logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="22" alt="arduino logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="22" alt="php logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" height="22" alt="pycharm logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="22" alt="vscode logo" />
+      <img src="https://skillicons.dev/icons?i=ps" height="22" alt="adobephotoshop logo" />
+      <img src="https://skillicons.dev/icons?i=ai" height="22" alt="adobeillustrator logo" />
     </div>
+  </div>
 
+  <!-- BLOC 3: Réseaux sociaux -->
+  <div class="block">
     <h2 align="left">Here are my social networks 👇</h2>
-    
     <div class="social">
       <div><img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo" /> foxylarenarde</div>
       <div><img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo" /> [jade.boudarel@gmail.com](mailto:jade.boudarel@gmail.com)</div>
       <div><img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo" /> [www.linkedin.com/in/jade-boudarel-74a826299](https://www.linkedin.com/in/jade-boudarel-74a826299)</div>
     </div>
+  </div>
 
-    <br clear="both">
-    
-    <div style="display: flex; gap: 20px; justify-content: space-around; flex-wrap: wrap;">
-      <img align="right" height="200" src="https://www.gif-maniac.com/gifs/50/49884.gif" alt="gif 1" />
-      <img align="left" height="200" src="https://miro.medium.com/v2/resize:fit:1400/0*932R80V7wmI-BNRV.gif" alt="gif 2" />
+  <!-- BLOC 4: Images -->
+  <div class="block">
+    <div class="gifs-side">
+      <img height="200" src="https://www.gif-maniac.com/gifs/50/49884.gif" />
+      <img height="200" src="https://miro.medium.com/v2/resize:fit:1400/0*932R80V7wmI-BNRV.gif" />
     </div>
-
-    <div align="center">
-      <img height="200" src="https://i.makeagif.com/media/4-05-2022/FvBVst.gif" alt="gif central" />
+    <div class="images">
+      <img height="200" src="https://i.makeagif.com/media/4-05-2022/FvBVst.gif" />
     </div>
+  </div>
 
+  <!-- BLOC 5: Mes boulots -->
+  <div class="block">
     <h2>My work</h2>
-    <ul>
-      <li><a href="https://jadeboudarel.github.io/visu-velo/static/parcours.html">page parcours</a></li>
-      <li><a href="https://github.com/jadeBoudarel/try-flask">page de try-flask</a></li>
-      <li><a href="https://jadeboudarel.github.io/try_bootstrap/">page de try_bootstrap</a></li>
-    </ul>
+    <div style="line-height: 1.8;">
+      [page parcours](https://jadeboudarel.github.io/visu-velo/static/parcours.html)<br>
+      [page de try-flask](https://github.com/jadeBoudarel/try-flask)<br>
+      [page de try_bootstrap](https://jadeboudarel.github.io/try_bootstrap/)
+    </div>
   </div>
 
   <script>
-    // Animation Snake automatique
     const canvas = document.getElementById('snakeCanvas');
     const ctx = canvas.getContext('2d');
     
-    // Redimensionner le canvas
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -106,50 +152,53 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    // Paramètres du snake
-    let snake = [{x: 100, y: 100}];
-    let dx = 2, dy = 1;
-    let hue = 0;
+    // 10 SERPENTS !
+    const snakes = [];
+    for(let i = 0; i < 10; i++) {
+      snakes.push({
+        body: [{x: Math.random()*canvas.width, y: Math.random()*canvas.height}],
+        dx: (Math.random()-0.5)*4,
+        dy: (Math.random()-0.5)*4,
+        hue: Math.random()*360,
+        speed: 0.6 + Math.random()*2
+      });
+    }
     
-    // Fondu d'apparition après chargement
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
     
-    // Boucle d'animation
     function animate() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      // Déplacer le snake
-      snake[0].x += dx;
-      snake[0].y += dy;
-      
-      // Rebondir sur les bords
-      if (snake[0].x > canvas.width || snake[0].x < 0) dx = -dx;
-      if (snake[0].y > canvas.height || snake[0].y < 0) dy = -dy;
-      
-      // Allonger occasionnellement
-      if (Math.random() < 0.01) {
-        snake.unshift({x: snake[0].x, y: snake[0].y});
-      }
-      
-      // Effet arc-en-ciel
-      hue += 2;
-      for (let i = 0; i < snake.length; i++) {
-        ctx.strokeStyle = `hsl(${hue + i * 10}, 100%, 50%)`;
-        ctx.lineWidth = 8 - i * 0.5;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(snake[i].x, snake[i].y);
-        if (i < snake.length - 1) {
-          ctx.lineTo(snake[i + 1].x, snake[i + 1].y);
+      snakes.forEach(snake => {
+        snake.body[0].x += snake.dx * snake.speed;
+        snake.body[0].y += snake.dy * snake.speed;
+        
+        if(snake.body[0].x > canvas.width || snake.body[0].x < 0) snake.dx *= -1;
+        if(snake.body[0].y > canvas.height || snake.body[0].y < 0) snake.dy *= -1;
+        
+        if(Math.random() < 0.015) {
+          snake.body.unshift({...snake.body[0]});
         }
-        ctx.stroke();
-      }
-      
-      // Limiter la longueur
-      if (snake.length > 20) snake.pop();
+        
+        snake.hue += 1.5;
+        for(let i = 0; i < snake.body.length; i++) {
+          ctx.strokeStyle = `hsl(${snake.hue + i*20}, 100%, ${45 + i*3}%)`;
+          ctx.lineWidth = Math.max(2, 10 - i * 0.4);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.beginPath();
+          ctx.moveTo(snake.body[i].x, snake.body[i].y);
+          if(i < snake.body.length - 1) {
+            ctx.lineTo(snake.body[i+1].x, snake.body[i+1].y);
+          }
+          ctx.stroke();
+        }
+        
+        if(snake.body.length > 30) snake.body.pop();
+      });
       
       requestAnimationFrame(animate);
     }
