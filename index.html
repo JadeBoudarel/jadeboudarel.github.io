@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Jade Boudarel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jade Boudarel — Portfolio</title>
   <style>
     body {
       margin: 0;
@@ -14,14 +15,15 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       position: relative;
       overflow-x: hidden;
+      color: #1e293b;
     }
-    
+
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    
+
     /* Canvas 10 serpents */
     #snakeCanvas {
       position: fixed;
@@ -29,51 +31,178 @@
       left: 0;
       z-index: -1;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
+      transition: opacity 0.6s ease-in-out;
     }
-    
+
     body.loaded #snakeCanvas {
       opacity: 0.25;
     }
-    
+
+    body.no-snakes #snakeCanvas {
+      opacity: 0 !important;
+    }
+
     /* Blocs espacés avec marges */
     .block {
       background: rgba(255, 255, 255, 0.95);
-      margin: 30px auto;
-      padding: 30px;
+      margin: 26px auto;
+      padding: 28px;
       border-radius: 20px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       max-width: 1000px;
       backdrop-filter: blur(10px);
     }
-    
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .btn-primary {
+      background: #23a6d5;
+      color: #ffffff;
+    }
+
+    .btn-accent {
+      background: #e73c7e;
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
     /* Logos petits alignés */
     .tech-logos {
       display: flex;
-      flex-wrap: nowrap;
-      gap: 8px;
+      flex-wrap: wrap;
+      gap: 14px;
       justify-content: center;
       align-items: center;
-      margin: 20px 0;
-      overflow-x: auto;
-      padding: 10px 0;
+      margin: 10px 0;
     }
-    
+
     .tech-logos img {
-      height: 22px;
+      height: 28px;
       width: auto;
       flex-shrink: 0;
     }
-    
-    .social div {
-      margin: 10px 0;
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
     }
-    
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .skill-card {
+      background: #f8fafc;
+      border-left: 4px solid #23a6d5;
+      padding: 14px 16px;
+      border-radius: 12px;
+    }
+
+    .skill-card.hidden {
+      display: none;
+    }
+
+    .skill-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .skill-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .cert-banner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: linear-gradient(120deg, #eff6ff, #fdf2f8);
+      border: 1px solid #dbeafe;
+      border-radius: 16px;
+      padding: 18px 20px;
+    }
+
+    .social div {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social a {
+      color: #0077B5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .social a:hover {
+      text-decoration: underline;
+    }
+
     .images {
       text-align: center;
       margin: 20px 0;
     }
-    
+
     .gifs-side {
       display: flex;
       gap: 20px;
@@ -81,32 +210,242 @@
       flex-wrap: wrap;
       margin: 20px 0;
     }
-    
+
+    .work-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .work-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .work-link-btn:hover,
+    .work-link-btn.active {
+      background: #23a6d5;
+      color: #ffffff;
+      border-color: #23a6d5;
+    }
+
+    .work-detail-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .work-detail-box h3 {
+      margin: 0 0 10px 0;
+      color: #0f172a;
+    }
+
+    .work-detail-box ul {
+      margin: 10px 0 14px 20px;
+    }
+
+    .work-external-link {
+      display: inline-block;
+      margin-top: 6px;
+      color: #e73c7e;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .work-external-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Modale CV */
+    .cv-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cv-modal-backdrop.open {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .cv-modal {
+      background: #ffffff;
+      color: #0f172a;
+      max-width: 820px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      margin: 20px auto;
+    }
+
+    .cv-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .cv-modal h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .cv-section {
+      margin-bottom: 18px;
+    }
+
+    .cv-section h4 {
+      margin: 0 0 8px 0;
+      color: #23a6d5;
+      font-size: 1.02rem;
+    }
+
+    .cv-section ul {
+      margin: 6px 0 0 20px;
+      line-height: 1.5;
+    }
+
+    .footer-bar {
+      text-align: center;
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      margin-bottom: 24px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    }
+
+    .footer-bar button {
+      background: rgba(255,255,255,0.2);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      padding: 5px 12px;
+      cursor: pointer;
+      margin-left: 8px;
+      font-size: 0.85rem;
+    }
+
     img { max-width: 100%; height: auto; }
     h2 { color: #333; margin: 0 0 20px 0; }
+
+    @media print {
+      body { background: #ffffff !important; padding: 0; }
+      #snakeCanvas, .block, .footer-bar, .cv-modal-header button, .btn-action { display: none !important; }
+      .cv-modal-backdrop { position: static; background: none; display: block !important; padding: 0; }
+      .cv-modal { box-shadow: none; max-width: 100%; padding: 0; }
+    }
   </style>
 </head>
 <body>
   <canvas id="snakeCanvas"></canvas>
-  
+
   <!-- BLOC 1: Phrase d'accueil -->
   <div class="block">
-    <h2 align="center">Hi 👋! My name is Jade and I'm 23, from France</h2>
+    <h2 align="center">Hi 👋! My name is Jade and I'm 24, from France</h2>
+    <p style="text-align: center; color: #475569; margin: 0; line-height: 1.6;">
+      Étudiant en dernière année de BTS CIEL (Cybersécurité, Informatique et réseaux, Électronique) à Mirepoix — recherche une licence informatique ou formation Bac+3 à Bac+5 pour la rentrée 2027 (télétravail ou présentiel, Cambieure 11240, permis B &amp; véhicule).
+    </p>
+
+    <div class="hero-actions">
+      <button type="button" class="btn-action btn-primary" onclick="openCvModal()">📄 Voir mon CV</button>
+      <a class="btn-action btn-accent" href="https://coursera.org/verify/professional-cert/0X4T1447TE5N" target="_blank" rel="noopener noreferrer">🛡️ Certificat Google Cybersécurité</a>
+      <a class="btn-action btn-secondary" href="https://www.linkedin.com/in/jade-boudarel-74a826299" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+    </div>
   </div>
 
   <!-- BLOC 2: Logos -->
   <div class="block">
     <div align="center" class="tech-logos">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="22" alt="javascript logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="22" alt="html5 logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="22" alt="css3 logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="22" alt="python logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="22" alt="arduino logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="22" alt="php logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" height="22" alt="pycharm logo" />
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="22" alt="vscode logo" />
-      <img src="https://skillicons.dev/icons?i=ps" height="22" alt="adobephotoshop logo" />
-      <img src="https://skillicons.dev/icons?i=ai" height="22" alt="adobeillustrator logo" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="28" alt="javascript logo" title="JavaScript" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="28" alt="html5 logo" title="HTML5" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="28" alt="css3 logo" title="CSS3" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="28" alt="python logo" title="Python" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" height="28" alt="arduino logo" title="Arduino" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" height="28" alt="php logo" title="PHP" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" height="28" alt="pycharm logo" title="PyCharm" />
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="28" alt="vscode logo" title="VS Code" />
+      <img src="https://skillicons.dev/icons?i=ps" height="28" alt="adobephotoshop logo" title="Photoshop" />
+      <img src="https://skillicons.dev/icons?i=ai" height="28" alt="adobeillustrator logo" title="Illustrator" />
+    </div>
+  </div>
+
+  <!-- BLOC 2B: Toutes mes compétences -->
+  <div class="block">
+    <h2>Mes compétences</h2>
+
+    <div class="filter-bar">
+      <button type="button" class="filter-btn active" onclick="filterSkills('all', this)">Tout</button>
+      <button type="button" class="filter-btn" onclick="filterSkills('dev', this)">Dev &amp; Web</button>
+      <button type="button" class="filter-btn" onclick="filterSkills('sys', this)">Systèmes &amp; Réseaux</button>
+      <button type="button" class="filter-btn" onclick="filterSkills('sec', this)">Cybersécurité</button>
+      <button type="button" class="filter-btn" onclick="filterSkills('crea', this)">Électronique &amp; Création</button>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card" data-cat="dev">
+        <h3>Langages &amp; Web</h3>
+        <p>Python, Flask, pandas, JavaScript, jQuery, PHP, C, C++, HTML, CSS, Bootstrap, Jupyter.</p>
+      </div>
+      <div class="skill-card" data-cat="sys">
+        <h3>Systèmes &amp; Réseaux</h3>
+        <p>Proxmox, pfSense, Linux, virtualisation, filtrage réseau / blacklist, gestion de parc, montage et réparation de PC.</p>
+      </div>
+      <div class="skill-card" data-cat="sec">
+        <h3>Cybersécurité (Certificat Google)</h3>
+        <p>SQL, SIEM, systèmes de détection d'intrusion (IDS), gestion des risques, identification et atténuation des menaces et vulnérabilités.</p>
+      </div>
+      <div class="skill-card" data-cat="crea">
+        <h3>Électronique &amp; Création</h3>
+        <p>Programmation Arduino, montage matériel, Photoshop, Illustrator, création de cosplay / couture à la machine et à la main.</p>
+      </div>
+      <div class="skill-card" data-cat="sys">
+        <h3>Bureautique &amp; Prévention</h3>
+        <p>Word, Excel, PowerPoint, Sauveteur Secouriste du Travail (SST, formation avril 2024).</p>
+      </div>
+      <div class="skill-card" data-cat="crea">
+        <h3>Atouts &amp; Relation client</h3>
+        <p>Autonome, minutieux, soucieux du détail, créatif, conseil et accueil client (animalerie, drive, couture).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOC 2C: Certification & Formation -->
+  <div class="block">
+    <h2>Certification &amp; Parcours</h2>
+    <div class="cert-banner">
+      <div>
+        <h3 style="margin: 0 0 6px 0;">Certificat professionnel Google Cybersécurité (Coursera — 8 cours)</h3>
+        <p style="margin: 0; color: #475569; font-size: 0.93rem;">
+          Obtenu le 13 décembre 2024 • BTS CIEL en cours (Mirepoix) • Niveau BTS Développeur intégrateur (Purple Campus, 2023–2024) • Bac pro Animalerie &amp; BEP Système Numérique.
+        </p>
+      </div>
+      <a class="btn-action btn-primary" href="https://coursera.org/verify/professional-cert/0X4T1447TE5N" target="_blank" rel="noopener noreferrer">
+        Vérifier le certificat ↗
+      </a>
     </div>
   </div>
 
@@ -114,45 +453,259 @@
   <div class="block">
     <h2 align="left">Here are my social networks 👇</h2>
     <div class="social">
-      <div><img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo" /> foxylarenarde</div>
-      <div><img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo" /> [jade.boudarel@gmail.com](mailto:jade.boudarel@gmail.com)</div>
-      <div><img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo" /> [www.linkedin.com/in/jade-boudarel-74a826299](https://www.linkedin.com/in/jade-boudarel-74a826299)</div>
+      <div>
+        <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo" />
+        <span>foxylarenarde</span>
+      </div>
+      <div>
+        <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo" />
+        <a href="mailto:jade.boudarel@gmail.com">jade.boudarel@gmail.com</a>
+      </div>
+      <div>
+        <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo" />
+        <a href="https://www.linkedin.com/in/jade-boudarel-74a826299" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/jade-boudarel-74a826299</a>
+      </div>
     </div>
   </div>
 
   <!-- BLOC 4: Images -->
   <div class="block">
     <div class="gifs-side">
-      <img height="200" src="https://www.gif-maniac.com/gifs/50/49884.gif" />
-      <img height="200" src="https://miro.medium.com/v2/resize:fit:1400/0*932R80V7wmI-BNRV.gif" />
+      <img height="200" src="https://www.gif-maniac.com/gifs/50/49884.gif" alt="gif animation 1" />
+      <img height="200" src="https://miro.medium.com/v2/resize:fit:1400/0*932R80V7wmI-BNRV.gif" alt="gif animation 2" />
     </div>
     <div class="images">
-      <img height="200" src="https://i.makeagif.com/media/4-05-2022/FvBVst.gif" />
+      <img height="200" src="https://i.makeagif.com/media/4-05-2022/FvBVst.gif" alt="gif animation 3" />
     </div>
   </div>
 
   <!-- BLOC 5: Mes boulots -->
   <div class="block">
     <h2>My work</h2>
-    <div style="line-height: 1.8;">
-      [page parcours](https://jadeboudarel.github.io/visu-velo/static/parcours.html)<br>
-      [page de try-flask](https://github.com/jadeBoudarel/try-flask)<br>
-      [page de try_bootstrap](https://jadeboudarel.github.io/try_bootstrap/)
+    <p style="color: #475569; margin-top: 0;">Clique sur un lien ci-dessous pour afficher le détail du boulot ou du projet :</p>
+
+    <div class="work-links">
+      <button type="button" class="work-link-btn active" onclick="showWork('parcours', this)">
+        <span>page parcours — Visu Vélo &amp; Parcours</span>
+        <span>▼ Détails</span>
+      </button>
+
+      <button type="button" class="work-link-btn" onclick="showWork('flask', this)">
+        <span>page de try-flask — Application &amp; Web Python</span>
+        <span>▼ Détails</span>
+      </button>
+
+      <button type="button" class="work-link-btn" onclick="showWork('bootstrap', this)">
+        <span>page de try_bootstrap — Intégration Web &amp; Full Stack</span>
+        <span>▼ Détails</span>
+      </button>
+
+      <button type="button" class="work-link-btn" onclick="showWork('saintjoseph', this)">
+        <span>Institut Saint-Joseph / Campus La Raque (Mai - Juil. 2024)</span>
+        <span>▼ Détails</span>
+      </button>
+
+      <button type="button" class="work-link-btn" onclick="showWork('auxmanettes', this)">
+        <span>Stage Développeur full stack — Aux Manettes (Janv. - Févr. 2024)</span>
+        <span>▼ Détails</span>
+      </button>
+
+      <button type="button" class="work-link-btn" onclick="showWork('autres_exp', this)">
+        <span>Autres expériences info &amp; relation client (Limoux / Carcassonne)</span>
+        <span>▼ Détails</span>
+      </button>
+    </div>
+
+    <div id="workDetails" class="work-detail-box"></div>
+  </div>
+
+  <div class="footer-bar">
+    Jade Boudarel • 24 ans • Cambieure (11240)
+    <button type="button" onclick="toggleSnakes()">Activer / Désactiver les serpents</button>
+  </div>
+
+  <!-- MODALE CV -->
+  <div id="cvModal" class="cv-modal-backdrop" onclick="closeCvModalOnBackdrop(event)">
+    <div class="cv-modal">
+      <div class="cv-modal-header">
+        <div>
+          <h3>Jade Boudarel — CV</h3>
+          <p style="margin: 4px 0 0 0; color: #475569; font-size: 0.92rem;">
+            24 ans • Cambieure (11240) • jade.boudarel@gmail.com • Permis B &amp; véhicule • Télétravail ou présentiel
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimer / PDF</button>
+          <button type="button" class="btn-action btn-secondary" onclick="closeCvModal()">✕</button>
+        </div>
+      </div>
+
+      <div class="cv-section">
+        <h4>Objectif</h4>
+        <p style="margin: 0; line-height: 1.5;">
+          Étudiant en dernière année de BTS CIEL (Cité scolaire de Mirepoix), à la recherche d'une licence informatique ou d'une formation Bac+3 à Bac+5 pour la rentrée 2027.
+        </p>
+      </div>
+
+      <div class="cv-section">
+        <h4>Expériences clés en informatique</h4>
+        <ul>
+          <li><strong>Développeur Web &amp; Administrateur Systèmes / Réseaux — Institut Saint-Joseph / Campus La Raque (mai - juil. 2024) :</strong> application web de gestion de parc (inventaire IP/MAC, état des mises à jour, déploiement à distance en un clic), serveur Proxmox, pare-feu/routeur pfSense (blacklist &amp; filtrage), infrastructure réseau d'une résidence étudiante.</li>
+          <li><strong>Stage Développeur full stack — Aux Manettes, tiers lieu Limoux (janv. - févr. 2024) :</strong> développement front-end et back-end d'un site et d'une application web (Python, JavaScript, Bootstrap, jQuery, Jupyter).</li>
+          <li><strong>Stage gestionnaire de réseaux et informaticien — Communauté de communes du Limouxin (2020, 8 sem.) :</strong> réseaux sur serveur Linux, réparation d'ordinateurs, conseil utilisateurs.</li>
+          <li><strong>Stage technicien informatique — A2M informatique, Limoux (2020, 8 sem.) :</strong> réparation, installation chez les clients, conseil et vente matériel.</li>
+        </ul>
+      </div>
+
+      <div class="cv-section">
+        <h4>Autres expériences (relation client &amp; polyvalence)</h4>
+        <ul>
+          <li><strong>E.Leclerc drive, Limoux (2022, 2 mois) :</strong> employé polyvalent, préparation de commandes et conseil clients.</li>
+          <li><strong>Villaverde (2021-2022, 8 sem.) &amp; Tridome (2022, 6 sem.), Carcassonne :</strong> stages vendeur animalier, conseil clients, manipulation/vente d'animaux et marchandises.</li>
+          <li><strong>Eden Couture, Carcassonne (2023, 6 sem.) :</strong> stage couturier-costumier, couture machine et main, conseil et commandes clients.</li>
+        </ul>
+      </div>
+
+      <div class="cv-section">
+        <h4>Formations &amp; Certifications</h4>
+        <ul>
+          <li><strong>Depuis sept. 2024 :</strong> BTS CIEL (dernière année) — Cité scolaire de Mirepoix.</li>
+          <li><strong>13 déc. 2024 :</strong> Certificat professionnel Google Cybersécurité (Coursera, 8 cours — <a href="https://coursera.org/verify/professional-cert/0X4T1447TE5N" target="_blank" rel="noopener noreferrer">vérifier</a>).</li>
+          <li><strong>Sept. 2023 - mars 2024 :</strong> Niveau BTS Développeur intégrateur de solutions intranet/internet (alternance) — Purple Campus, Carcassonne.</li>
+          <li><strong>2020 - 2022 :</strong> Bac pro Technicien conseil-vente en animalerie (mention assez bien) — Clair Foyer, Caussade.</li>
+          <li><strong>Jan. 2018 - déc. 2020 :</strong> BEP Système Numérique (mention bien) — Jules Fil, Carcassonne.</li>
+          <li><strong>Avril 2024 :</strong> Sauveteur Secouriste du Travail (SST).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <script>
+    const workData = {
+      parcours: {
+        title: "Page parcours (visu-velo)",
+        description: "Projet de visualisation et de présentation de parcours lié à l'exploration web et au développement front-end.",
+        bullets: [
+          "Mise en page et structuration d'une page HTML dédiée à l'affichage de parcours.",
+          "Travail sur l'ergonomie, la lisibilité et l'intégration visuelle."
+        ],
+        url: "https://jadeboudarel.github.io/visu-velo/static/parcours.html",
+        linkText: "Ouvrir la page parcours"
+      },
+      flask: {
+        title: "Projet try-flask",
+        description: "Dépôt d'expérimentation et de développement web utilisant le micro-framework Python Flask.",
+        bullets: [
+          "Développement côté serveur en Python avec Flask.",
+          "Structuration de routes, templates et logique applicative web."
+        ],
+        url: "https://github.com/jadeBoudarel/try-flask",
+        linkText: "Voir le dépôt try-flask sur GitHub"
+      },
+      bootstrap: {
+        title: "Projet try_bootstrap",
+        description: "Page de test et d'intégration responsive réalisée avec le framework CSS Bootstrap.",
+        bullets: [
+          "Utilisation de la grille et des composants Bootstrap pour adapter l'affichage aux différents écrans.",
+          "Pratique de l'intégration HTML/CSS moderne et rapide."
+        ],
+        url: "https://jadeboudarel.github.io/try_bootstrap/",
+        linkText: "Ouvrir la page try_bootstrap"
+      },
+      saintjoseph: {
+        title: "Développeur Web & Administrateur Systèmes / Réseaux — Institut Saint-Joseph / Campus La Raque (Mai - Juil. 2024)",
+        description: "Mission combinant développement d'outil de supervision et administration d'infrastructures systèmes et réseaux.",
+        bullets: [
+          "Conception d'une application web de gestion de parc : inventaire des postes avec remontée automatique des adresses IP, adresses MAC et de l'état des mises à jour.",
+          "Déploiement à distance des mises à jour des PC en un clic avec suivi depuis l'interface.",
+          "Déploiement et administration d'un serveur de virtualisation sous Proxmox.",
+          "Configuration et sécurisation d'un pare-feu/routeur pfSense (blacklist et filtrage réseau) et maintien du réseau d'une résidence étudiante."
+        ],
+        url: "https://www.linkedin.com/in/jade-boudarel-74a826299",
+        linkText: "Voir le profil LinkedIn"
+      },
+      auxmanettes: {
+        title: "Stage Développeur full stack — Aux Manettes, tiers lieu Limoux (Janv. - Févr. 2024)",
+        description: "Développement complet (front-end et back-end) d'un site et d'une application web au sein d'un tiers lieu.",
+        bullets: [
+          "Développement web avec Python, JavaScript, Bootstrap, jQuery et Jupyter.",
+          "Réalisation des fonctionnalités côté client et côté serveur."
+        ],
+        url: "https://github.com/jadeBoudarel/try-flask",
+        linkText: "Découvrir mes projets Python / Web sur GitHub"
+      },
+      autres_exp: {
+        title: "Autres expériences informatiques & relation client",
+        description: "Expériences terrain en support informatique, systèmes/réseaux et contact clientèle.",
+        bullets: [
+          "Stage gestionnaire de réseaux et informaticien (8 semaines) — Communauté de communes du Limouxin : gestion de réseaux sur serveur Linux, réparation d'ordinateurs, conseil aux utilisateurs.",
+          "Stage technicien informatique (8 semaines) — A2M informatique (Limoux) : réparation, installation chez les clients, vente et conseil matériel.",
+          "Relation client & polyvalence : E.Leclerc drive (2 mois), stages vendeur animalier chez Villaverde (8 semaines) et Tridome (6 semaines), stage couturier-costumier chez Eden Couture (6 semaines)."
+        ],
+        url: "mailto:jade.boudarel@gmail.com",
+        linkText: "Me contacter par e-mail"
+      }
+    };
+
+    function showWork(key, btnEl) {
+      const item = workData[key];
+      if (!item) return;
+
+      document.querySelectorAll('.work-link-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      const bulletsHtml = item.bullets.map(b => `<li>${b}</li>`).join('');
+      const targetAttr = item.url.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener noreferrer"';
+
+      document.getElementById('workDetails').innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <ul>${bulletsHtml}</ul>
+        <a class="work-external-link" href="${item.url}"${targetAttr}>${item.linkText} →</a>
+      `;
+    }
+
+    function filterSkills(cat, btnEl) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      document.querySelectorAll('.skill-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function openCvModal() {
+      document.getElementById('cvModal').classList.add('open');
+    }
+
+    function closeCvModal() {
+      document.getElementById('cvModal').classList.remove('open');
+    }
+
+    function closeCvModalOnBackdrop(e) {
+      if (e.target.id === 'cvModal') closeCvModal();
+    }
+
+    function toggleSnakes() {
+      document.body.classList.toggle('no-snakes');
+    }
+
+    showWork('parcours', document.querySelector('.work-link-btn'));
+
     const canvas = document.getElementById('snakeCanvas');
     const ctx = canvas.getContext('2d');
-    
+
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    
-    // 10 SERPENTS !
+
     const snakes = [];
     for(let i = 0; i < 10; i++) {
       snakes.push({
@@ -163,26 +716,26 @@
         speed: 0.6 + Math.random()*2
       });
     }
-    
+
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
-    
+
     function animate() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
+
       snakes.forEach(snake => {
         snake.body[0].x += snake.dx * snake.speed;
         snake.body[0].y += snake.dy * snake.speed;
-        
+
         if(snake.body[0].x > canvas.width || snake.body[0].x < 0) snake.dx *= -1;
         if(snake.body[0].y > canvas.height || snake.body[0].y < 0) snake.dy *= -1;
-        
+
         if(Math.random() < 0.015) {
           snake.body.unshift({...snake.body[0]});
         }
-        
+
         snake.hue += 1.5;
         for(let i = 0; i < snake.body.length; i++) {
           ctx.strokeStyle = `hsl(${snake.hue + i*20}, 100%, ${45 + i*3}%)`;
@@ -196,13 +749,13 @@
           }
           ctx.stroke();
         }
-        
+
         if(snake.body.length > 30) snake.body.pop();
       });
-      
+
       requestAnimationFrame(animate);
     }
-    
+
     animate();
   </script>
 </body>
